@@ -1,4 +1,42 @@
+:root {
+  --buster-black: #050505;
+  --buster-yellow: #f6c343;
+  --buster-yellow-dark: #c9971f;
+  --buster-panel: #111111;
+  --buster-text: #f5f5f5;
+  --buster-muted: #b8b8b8;
+  --buster-danger: #ff5a5a;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  background: var(--buster-black);
+  color: var(--buster-text);
+}
+
+input {
+  background: #1a1a1a;
+  color: var(--buster-text);
+  border: 1px solid #333;
+  border-radius: 8px;
+}
+
+button {
+  background: var(--buster-yellow);
+  color: #111;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+a {
+  color: var(--buster-yellow);
 }

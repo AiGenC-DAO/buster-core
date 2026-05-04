@@ -68,31 +68,44 @@ export default function DashboardPage() {
 
   if (!isAuthorized || status) {
     return (
-      <main style={{ padding: 32 }}>
-        <h1>Buster Core</h1>
-        <p>{status}</p>
+      <main style={{ minHeight: '100vh', display: 'grid', placeItems: 'center' }}>
+        <section style={{ background: '#111', border: '1px solid #2a2a2a', borderRadius: 18, padding: 28 }}>
+          <h1 style={{ color: '#f6c343', marginTop: 0 }}>Buster Core</h1>
+          <p style={{ color: '#b8b8b8' }}>{status}</p>
+        </section>
       </main>
     );
   }
 
   return (
-    <main style={{ padding: 32 }}>
-      <h1>Buster Core Dashboard</h1>
-
-      {profile && (
-        <>
-          <RoleNav role={profile.role} />
-
-          <section style={{ marginTop: 24 }}>
-            <p><strong>Full name:</strong> {profile.full_name}</p>
-            <p><strong>Email:</strong> {profile.email}</p>
-            <p><strong>Role:</strong> {profile.role}</p>
-            <p><strong>Organization:</strong> {organizationName}</p>
-          </section>
-
+    <main style={{ minHeight: '100vh', padding: 32 }}>
+      <section style={{ maxWidth: 900, margin: '0 auto' }}>
+        <header style={{ display: 'flex', justifyContent: 'space-between', gap: 16, alignItems: 'center', marginBottom: 28 }}>
+          <div>
+            <h1 style={{ color: '#f6c343', marginBottom: 6 }}>Buster Core Dashboard</h1>
+            <p style={{ color: '#b8b8b8', marginTop: 0 }}>Early Adopter Program command center</p>
+          </div>
           <button onClick={signOut}>Sign Out</button>
-        </>
-      )}
+        </header>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '260px 1fr', gap: 20 }}>
+          <aside style={{ background: '#111', border: '1px solid #2a2a2a', borderRadius: 18, padding: 20 }}>
+            {profile && <RoleNav role={profile.role} />}
+          </aside>
+
+          <section style={{ background: '#111', border: '1px solid #2a2a2a', borderRadius: 18, padding: 24 }}>
+            <h2 style={{ marginTop: 0 }}>Operator Profile</h2>
+            {profile && (
+              <>
+                <p><strong>Full name:</strong> {profile.full_name}</p>
+                <p><strong>Email:</strong> {profile.email}</p>
+                <p><strong>Role:</strong> {profile.role}</p>
+                <p><strong>Organization:</strong> {organizationName}</p>
+              </>
+            )}
+          </section>
+        </div>
+      </section>
     </main>
   );
 }

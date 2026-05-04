@@ -15,10 +15,7 @@ export default function LoginPage() {
     setStatus('');
     setIsLoading(true);
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password
-    });
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
 
     if (error) {
       setStatus(error.message);
@@ -30,46 +27,29 @@ export default function LoginPage() {
   }
 
   return (
-    <main style={{ padding: 32, maxWidth: 420 }}>
-      <h1>Buster Core Login</h1>
+    <main style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', padding: 24 }}>
+      <section style={{ width: '100%', maxWidth: 420, background: '#111', border: '1px solid #2a2a2a', borderRadius: 18, padding: 28 }}>
+        <h1 style={{ color: '#f6c343', marginTop: 0 }}>Buster Core</h1>
+        <p style={{ color: '#b8b8b8' }}>EAP operator login</p>
 
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>Email</label><br />
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            autoComplete="email"
-            style={{ width: '100%', padding: 8 }}
-          />
-        </div>
+        <form onSubmit={handleLogin}>
+          <label>Email</label>
+          <input value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" style={{ width: '100%', padding: 12, marginTop: 6, marginBottom: 16 }} />
 
-        <div style={{ marginTop: 12 }}>
-          <label>Password</label><br />
-          <input
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            autoComplete="current-password"
-            style={{ width: '100%', padding: 8 }}
-          />
-        </div>
+          <label>Password</label>
+          <input type={showPassword ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" style={{ width: '100%', padding: 12, marginTop: 6 }} />
 
-        <label style={{ display: 'block', marginTop: 8 }}>
-          <input
-            type="checkbox"
-            checked={showPassword}
-            onChange={() => setShowPassword(!showPassword)}
-          />{' '}
-          Show password
-        </label>
+          <label style={{ display: 'block', marginTop: 12, color: '#b8b8b8' }}>
+            <input type="checkbox" checked={showPassword} onChange={() => setShowPassword(!showPassword)} /> Show password
+          </label>
 
-        <button type="submit" disabled={isLoading} style={{ marginTop: 16 }}>
-          {isLoading ? 'Signing in...' : 'Log In'}
-        </button>
-      </form>
+          <button type="submit" disabled={isLoading} style={{ marginTop: 18, width: '100%' }}>
+            {isLoading ? 'Signing in...' : 'Log In'}
+          </button>
+        </form>
 
-      {status && <p style={{ color: 'red' }}>{status}</p>}
+        {status && <p style={{ color: '#ff5a5a' }}>{status}</p>}
+      </section>
     </main>
   );
 }
